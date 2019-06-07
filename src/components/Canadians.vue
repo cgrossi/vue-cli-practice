@@ -20,7 +20,7 @@ export default {
   data() {
     return {};
   },
-  computed: {
+  created: {
     cadNames: function() {
       return this.names.filter(el => el.location === "Canada");
     }
