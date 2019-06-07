@@ -1,27 +1,21 @@
 <template>
-  <div id="main-content">
-    <h2>This is where all of my content will go</h2>
-    <p>Here is a list of people:</p>
-    <p>Testing components, click events, iterating through an array of objects, and scoped CSS.</p>
-    <p>Click a name below to see more info</p>
+  <div id="canada">
+    <h2>People from Canada go here</h2>
+    <p>Here is a list of people from Canada:</p>
+    <p>Testing nested components, computed properties, and passed props</p>
     <ul>
-      <li v-for="(name, key) in names" @click="name.show = !name.show" :key="key">
+      <li v-for="(name, key) in cadNames" @click="name.show = !name.show" :key="key">
         <h2>{{ name.name }}</h2>
         <h4 class="rule" v-if="name.show">Age: {{ name.age }}</h4>
         <h4 v-show="name.show">Location: {{ name.location }}</h4>
         <h4 v-show="name.show">Key: {{ key }}</h4>
       </li>
     </ul>
-    <canadians/>
   </div>
 </template>
 
 <script>
-import Cad from "./Canadians";
 export default {
-  components: {
-    canadians: Cad
-  },
   data() {
     return {
       names: [
@@ -35,12 +29,17 @@ export default {
         { name: "Bob", age: 27, location: "New Zealand", show: false }
       ]
     };
+  },
+  computed: {
+    cadNames: function() {
+      return this.names.filter(el => el.location === "Canada");
+    }
   }
 };
 </script>
 
 <style scoped>
-#main-content {
+#canada {
   background-color: rgb(193, 215, 255);
 }
 

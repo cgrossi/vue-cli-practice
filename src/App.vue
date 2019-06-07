@@ -35,4 +35,8 @@ export default {
   padding: 0;
   box-sizing: border-box;
 }
+
+h2 {
+  padding: 8px 0;
+}
 </style>
