@@ -2,10 +2,15 @@
   <div id="main-content">
     <h2>This is where all of my content will go</h2>
     <p>Here is a list of people:</p>
-    <p>Testing components, click events, iterating through an array of objects, and scoped CSS.</p>
-    <p>Click a name below to see more info</p>
+    <p>Testing components, click events, iterating through an array of objects, scoped CSS, and custom event emitting.</p>
+    <p>Click a name below to see more info. Doubleclick to delete a name.</p>
     <ul>
-      <li v-for="(name, key) in names" @click="name.show = !name.show" :key="key">
+      <li
+        v-for="(name, key) in names"
+        @click="name.show = !name.show"
+        :key="key"
+        @dblclick="deleteName(name.name)"
+      >
         <h2>{{ name.name }}</h2>
         <h4 class="rule" v-if="name.show">Age: {{ name.age }}</h4>
         <h4 v-show="name.show">Location: {{ name.location }}</h4>
@@ -13,18 +18,26 @@
       </li>
     </ul>
     <canadians :names="names"></canadians>
+    <api-section></api-section>
   </div>
 </template>
 
 <script>
 import Cad from "./Canadians";
+import ApiSection from "./ApiTesting";
 export default {
   components: {
-    canadians: Cad
+    canadians: Cad,
+    "api-section": ApiSection
   },
   props: ["names"],
   data() {
     return {};
+  },
+  methods: {
+    deleteName(name) {
+      this.$emit("delete", { name });
+    }
   }
 };
 </script>

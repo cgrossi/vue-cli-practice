@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <app-header></app-header>
-    <Main :names="names"></Main>
+    <Main :names="names" @delete="deleteName"></Main>
     <Copyright></Copyright>
   </div>
 </template>
@@ -30,6 +30,11 @@ export default {
         { name: "Bob", age: 27, location: "New Zealand", show: false }
       ]
     };
+  },
+  methods: {
+    deleteName(payload) {
+      this.names = this.names.filter(el => el.name !== payload.name);
+    }
   }
 };
 </script>

@@ -1,40 +1,35 @@
 <template>
-  <div id="canada">
-    <h2>People from Canada go here</h2>
-    <p>Here is a list of people from Canada:</p>
-    <p>Testing nested components, life-cycle hooks, and passed props.</p>
+  <div id="api-test">
+    <h2>Api Practicing</h2>
+    <p>Dummy data is grabbed from jsonplaceholder api with axios and displayed at the 'created lifecycle hook</p>
     <ul>
-      <li v-for="(name, key) in cadNames()" @click="name.show = !name.show" :key="key">
-        <h2>{{ name.name }}</h2>
-        <h4 class="rule" v-if="name.show">Age: {{ name.age }}</h4>
-        <h4 v-show="name.show">Location: {{ name.location }}</h4>
-        <h4 v-show="name.show">Key: {{ key }}</h4>
+      <li v-for="photo in photos" :key="photo.id">
+        <h4>{{ photo.title }}</h4>
+        <img :src="photo.thumbnailUrl" alt="thumbnail">
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  props: ["names"],
   data() {
     return {
-      cadFilter: ""
+      photos: []
     };
   },
-  methods: {
-    cadNames: function() {
-      return this.names.filter(el => el.location === "Canada");
-    }
-  },
-  mounted: function() {
-    this.cadNames();
+  methods: {},
+  created: function() {
+    axios.get("https://jsonplaceholder.typicode.com/photos/").then(response => {
+      this.photos = response.data.filter(el => el.id < 51);
+    });
   }
 };
 </script>
 
 <style scoped>
-#canada {
+#api-test {
   background-color: rgb(193, 215, 255);
 }
 
