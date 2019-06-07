@@ -2,9 +2,9 @@
   <div id="canada">
     <h2>People from Canada go here</h2>
     <p>Here is a list of people from Canada:</p>
-    <p>Testing nested components, computed properties, and passed props</p>
+    <p>Testing nested components, life-cycle hooks, and passed props.</p>
     <ul>
-      <li v-for="(name, key) in cadNames" @click="name.show = !name.show" :key="key">
+      <li v-for="(name, key) in cadNames()" @click="name.show = !name.show" :key="key">
         <h2>{{ name.name }}</h2>
         <h4 class="rule" v-if="name.show">Age: {{ name.age }}</h4>
         <h4 v-show="name.show">Location: {{ name.location }}</h4>
@@ -18,12 +18,17 @@
 export default {
   props: ["names"],
   data() {
-    return {};
+    return {
+      cadFilter: ""
+    };
   },
-  created: {
+  methods: {
     cadNames: function() {
       return this.names.filter(el => el.location === "Canada");
     }
+  },
+  created: function() {
+    this.cadNames();
   }
 };
 </script>

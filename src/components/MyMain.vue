@@ -12,7 +12,7 @@
         <h4 v-show="name.show">Key: {{ key }}</h4>
       </li>
     </ul>
-    <canadians/>
+    <canadians :names="names"></canadians>
   </div>
 </template>
 
