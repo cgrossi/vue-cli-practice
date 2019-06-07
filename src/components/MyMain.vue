@@ -22,19 +22,9 @@ export default {
   components: {
     canadians: Cad
   },
+  props: ["names"],
   data() {
-    return {
-      names: [
-        { name: "Bill", age: 20, location: "Canada", show: false },
-        { name: "Tom", age: 30, location: "France", show: false },
-        { name: "Joe", age: 46, location: "Belgium", show: false },
-        { name: "Frank", age: 60, location: "USA", show: false },
-        { name: "Carmine", age: 30, location: "Canada", show: false },
-        { name: "Emmy", age: 24, location: "UAE", show: false },
-        { name: "Sara", age: 22, location: "Germany", show: false },
-        { name: "Bob", age: 27, location: "New Zealand", show: false }
-      ]
-    };
+    return {};
   }
 };
 </script>
