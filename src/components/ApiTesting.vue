@@ -1,9 +1,14 @@
 <template>
   <div id="api-test">
     <h2>Api Practicing</h2>
-    <p>Dummy data is grabbed from jsonplaceholder api with axios and displayed at the 'created lifecycle hook</p>
+    <p>Dummy data is grabbed from jsonplaceholder api with axios and displayed at the 'created lifecycle hook.</p>
+    <p>There is also an input box where you can filter the items by search text.</p>
+    <p>
+      <strong>Enter text into box below to filter images</strong>
+    </p>
+    <input type="text" v-model="filtered">
     <ul>
-      <li v-for="photo in photos" :key="photo.id">
+      <li v-for="photo in filterImages" :key="photo.id">
         <h4>{{ photo.title }}</h4>
         <img :src="photo.thumbnailUrl" alt="thumbnail">
       </li>
@@ -16,10 +21,16 @@ import axios from "axios";
 export default {
   data() {
     return {
-      photos: []
+      photos: [],
+      filtered: ""
     };
   },
   methods: {},
+  computed: {
+    filterImages() {
+      return this.photos.filter(el => el.title.match(this.filtered));
+    }
+  },
   created: function() {
     axios.get("https://jsonplaceholder.typicode.com/photos/").then(response => {
       this.photos = response.data.filter(el => el.id < 51);
@@ -63,6 +74,11 @@ li {
 }
 
 p {
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+}
+
+input {
+  padding: 10px 5px;
+  font-size: 1.1rem;
 }
 </style>
